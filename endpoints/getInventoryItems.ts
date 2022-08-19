@@ -82,7 +82,7 @@ export type TInventoryItems = {
     >
 }
 
-export async function getInventoryItems(userId: steamid, appId: bigint, options: IGetInventoryItems = {}){
+export async function getInventoryItems(userId: steamid, appId: bigint, options: IGetInventoryItems = {}): Promise<TInventoryItems> {
     const REQ_URL = new URL(`https://steamcommunity.com/inventory/${userId}/${appId}/${options.contextId || 2}`);
     options.language && REQ_URL.searchParams.append("l", options.language);
     options.count && REQ_URL.searchParams.append("count", options.count.toString());
@@ -91,6 +91,10 @@ export async function getInventoryItems(userId: steamid, appId: bigint, options:
     return await (await fetch(REQ_URL)).json() as TInventoryItems;
 }
 
-export async function getAllInventoryItems(userId: steamid, options: IGetInventoryItems = {}){
+/**
+ * Fetches all items in the user inventory to the max allowed returned items by the steam community API.
+ * > NOTE: double check the total_inventory_count to ensure you are indeed retrieving all items, paginate if not.
+ */
+export async function getAllInventoryItems(userId: steamid, options: IGetInventoryItems = {}): Promise<TInventoryItems> {
     return await getInventoryItems(userId, 753n, {...options, contextId: 6})
 }
