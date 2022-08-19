@@ -60,6 +60,9 @@ export type TInventoryItems = {
         icon_url: string,
         icon_url_large: string,
         descriptions: Array<{value: string, color?: string, type?: string}>,
+        /**
+         * Indicates if the item is able to be traded with other users
+         */
         tradable: rawBool,
         actions: Array<{link: string, name: string}>,
         name: string,
@@ -70,6 +73,9 @@ export type TInventoryItems = {
         commodity: number,
         market_tradable_restriction: number,
         market_marketable_restriction: number,
+        /**
+         * Indicates if the item can be sold on the steam marketplace
+         */
         marketable: rawBool,
         tags: Array<{
             category: string,
