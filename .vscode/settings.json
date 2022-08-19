@@ -1,0 +1,12 @@
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "copyrighter.author": "Duart Snel",
+  "copyrighter.license": "MIT",
+  "cSpell.words": [
+    "appids",
+    "appinfo",
+    "steamid"
+  ],
+  "editor.maxTokenizationLineLength": 200000
+}
