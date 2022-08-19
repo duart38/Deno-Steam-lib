@@ -82,6 +82,9 @@ export type TInventoryItems = {
     >
 }
 
+/**
+ * Fetches all the inventory items pertaining to a given app/game.
+ */
 export async function getInventoryItems(userId: steamid, appId: bigint, options: IGetInventoryItems = {}): Promise<TInventoryItems> {
     const REQ_URL = new URL(`https://steamcommunity.com/inventory/${userId}/${appId}/${options.contextId || 2}`);
     options.language && REQ_URL.searchParams.append("l", options.language);
@@ -93,6 +96,7 @@ export async function getInventoryItems(userId: steamid, appId: bigint, options:
 
 /**
  * Fetches all items in the user inventory to the max allowed returned items by the steam community API.
+ * The appids returned by the endpoint here all pertain to a special app-id and thus one cannot identify the type of game by those.
  * > NOTE: double check the total_inventory_count to ensure you are indeed retrieving all items, paginate if not.
  */
 export async function getAllInventoryItems(userId: steamid, options: IGetInventoryItems = {}): Promise<TInventoryItems> {
